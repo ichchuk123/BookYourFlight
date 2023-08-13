@@ -4,8 +4,7 @@ import requests
 from tkcalendar import *
 import sqlite3
 import os
-
-from login2 import username, password, email, phno
+import database
 
 dash = Tk()
 
@@ -13,15 +12,7 @@ dash.title("Dashboard")
 dash.attributes('-fullscreen', True)
 dash.configure(bg="#172233")
 
-if os.path.exists("NewSystem.db"):
-    conn = sqlite3.connect("NewSystem.db")
-else:   
-    conn = sqlite3.connect("NewSystem.db")
-    c = conn.cursor()
-    c.execute('''CREATE TABLE accounts
-              (name text, password integer, email text, phno text )''')
-    conn.commit()
-    conn.close()
+#database.create_table()
 
 api_key = '30d4741c779ba94c470ca1f63045390a'
 
@@ -54,8 +45,6 @@ ticketLabel.place(x=100, y=350)
 
 normalLabel = Label(frm, image=normal, bg="black", border=1)
 normalLabel.place(x=150, y=420)
-
-
 
 fm1 = Label(afrm, bg="#f2f2f2", width=130, height=10)
 fm1.place(x=65, y=10)
@@ -105,7 +94,6 @@ weather_frame.update()  # Update the frame to make sure its contents are display
 logo = PhotoImage(file="images/planebg1.png")
 logo_label = Label(dash, bg="#172233", image=logo)
 logo_label.place(x=50, y=50, relwidth=0.1, relheight=0.1)
-
 
 
 ########################################################################################################
@@ -217,12 +205,11 @@ def open_settings():
     Username.place(x=280, y=95)
 
     def edit_update_username():
-        conn = sqlite3.connect("NewSystem2.db")
-        c = conn.cursor()
-        c.execute("UPDATE accounts SET username=?, password=?, emai=?, phno=?",[username.get(), password.get(), email.get(), phno.get()])
-        conn.commit()
-        conn.close()
-
+        username = displayNameEntry.get()
+        password = displayPasswordEntry.get()
+        email = displayEmailEntry.get()
+        phno = displayPhoneEntry.get()
+        database.update_customer(username, password, email, phno)
 
     ########################################################################################################
 
