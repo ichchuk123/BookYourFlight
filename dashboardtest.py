@@ -46,6 +46,24 @@ ticketLabel.place(x=100, y=350)
 normalLabel = Label(frm, image=normal, bg="black", border=1)
 normalLabel.place(x=150, y=420)
 
+name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+name.place(x=30, y=100)
+
+seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+seat.place(x=165, y=100)
+
+boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+boardingtime.place(x=160, y=165)
+
+flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+flight.place(x=35, y=165)
+
+date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+date.place(x=30, y=215)
+
+destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+destination.place(x=160, y=215)
+
 fm1 = Label(afrm, bg="#f2f2f2", width=130, height=10)
 fm1.place(x=65, y=10)
 
@@ -121,6 +139,7 @@ def ticket_book():
         choose = Label(frm, text="Choose date and time for your booking :", bg="white", fg="#172233", border=0, font=("Microsoft Yahei UI light", 30))
         choose.place(x=75, y=50)
 #       
+
         global cal
         cal = Calendar(frm, font="Arial 18", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=10)
         cal.place(x=210, y=150)
@@ -146,6 +165,26 @@ def ticket_book():
 
             normalLabel = Label(frm, image=normal, bg="black", border=1)
             normalLabel.place(x=150, y=200)
+
+            name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            name.place(x=30, y=100)
+
+            seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            seat.place(x=165, y=100)
+
+            boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            boardingtime.place(x=160, y=165)
+
+            flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            flight.place(x=35, y=165)
+
+            date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            date.place(x=30, y=215)
+
+            destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            destination.place(x=160, y=215)
+            
+                    
 
             
 
