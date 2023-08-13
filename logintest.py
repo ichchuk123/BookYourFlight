@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox,messagebox
 import sqlite3
 import os
+import database
 
 
 
@@ -111,18 +112,27 @@ eye_close = Button(frm, image=bg_eye1, border=0,bg='#f7f9fc', command=close_eye)
 
 #####---------------------------------------------
 def logN():
-    conn = sqlite3.connect("NewSystem3.db")
-    c = conn.cursor()
-    c.execute("SELECT * FROM accounts WHERE username=? AND password=?", [username.get(), password.get()])
-    if c.fetchone() is None:
-        print("Incorrect credentials")
-        Label(frm, text="Invalid Data", bg="#f2f2f2", fg="red", width=15, height=1, font=("Microsoft Yahei UI light",10)).place(x=35, y=242)
-        Button(frm, text="Forgot Password?", border=0, fg="#57a1f8", bg="#f2f2f2",width=15, height=0, font=("Microsoft Yahei UI light",10,'bold')).place(x=135, y=240)
-    else:
+
+    #conn = sqlite3.connect("NewSystem3.db")
+    #c = conn.cursor()
+    #c.execute("SELECT * FROM accounts")
+    #r = c.fetchall()
+    #for i in r:
+    #    name = 
+    #if c.fetchone() is None:
+    #    print("Incorrect credentials")
+    #    Label(frm, text="Invalid Data", bg="#f2f2f2", fg="red", width=15, height=1, font=("Microsoft Yahei UI light",10)).place(x=35, y=242)
+    #    Button(frm, text="Forgot Password?", border=0, fg="#57a1f8", bg="#f2f2f2",width=15, height=0, font=("Microsoft Yahei UI light",10,'bold')).place(x=135, y=240)
+    #else:
+    #    print("Logged In!")
+    #    login.destroy()
+    #    import dashboardtest
+
+    if database.fetch_data:
         print("Logged In!")
         login.destroy()
         import dashboardtest
-
+    
 
 loginl = Button(frm, text="Log In", border=0, fg="white", bg="#57a1f8",width=20, height=0, font=("Microsoft Yahei UI light",15,'bold'), command=logN)
 loginl.place(x=35, y=190)

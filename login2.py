@@ -89,7 +89,7 @@ def on_leave(e):
     if email_entry.get()=='':
         email_entry.insert(0,'E-MAIL')
 
-email_entry = Entry(frm, tex='E-MAIL', border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+email_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
 email_entry.place(x=105, y=245)
 email_entry.insert(0,'E-MAIL')
 email_entry.bind("<FocusIn>", on_enter)
@@ -106,7 +106,7 @@ def on_leave(e):
     if phno_entry.get()=='+977 - ':
         phno_entry.insert(0,'+977 - ')
 
-phno_entry = Entry(frm, text='+977 - ', border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+phno_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
 phno_entry.place(x=105, y=305)
 phno_entry.insert(0,'+977 - ')
 phno_entry.bind("<FocusIn>", on_enter)
@@ -122,7 +122,7 @@ def on_leave(e):
     if password_entry.get()=='':
         password_entry.insert(0,'PASSWORD')
 
-password_entry = Entry(frm, text='PASSWORD', border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+password_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
 password_entry.place(x=105, y=360)
 password_entry.insert(0,'PASSWORD')
 password_entry.bind("<FocusIn>", on_enter)
@@ -167,8 +167,7 @@ def logina():
 register = Button(frm, text="Log In", border=0, fg="#57a1f8", bg="#f7f9fc",width=6, height=0,cursor="hand2", font=("Microsoft Yahei UI light",11,'bold'),command=logina )
 register.place(x=240, y=75)
 
-if __name__ == "__main__":
-    signup()
+
 
 login2.mainloop()
 dash = Tk()
