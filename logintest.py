@@ -13,10 +13,10 @@ login.geometry("800x600")
 login.resizable(0,0)
 login.wm_attributes("-transparentcolor", "grey")
 
-if os.path.exists("NewSystem2.db"):
-    conn = sqlite3.connect("NewSystem2.db")
+if os.path.exists("NewSystem3.db"):
+    conn = sqlite3.connect("NewSystem3.db")
 else:
-    conn = sqlite3.connect("NewSystem2.db")
+    conn = sqlite3.connect("NewSystem3.db")
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS accounts
               (username text, password integer, email text, phno text)''')
@@ -111,7 +111,7 @@ eye_close = Button(frm, image=bg_eye1, border=0,bg='#f7f9fc', command=close_eye)
 
 #####---------------------------------------------
 def logN():
-    conn = sqlite3.connect("NewSystem2.db")
+    conn = sqlite3.connect("NewSystem3.db")
     c = conn.cursor()
     c.execute("SELECT * FROM accounts WHERE username=? AND password=?", [username.get(), password.get()])
     if c.fetchone() is None:

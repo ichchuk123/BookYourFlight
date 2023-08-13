@@ -5,6 +5,8 @@ import sqlite3
 import os
 import requests
 from tkcalendar import *
+import database
+
 
 login2=Tk()
 
@@ -15,15 +17,7 @@ login2.resizable(0,0)
 login2.wm_attributes("-transparentcolor", "grey")
 #login2.iconbitmap("plane.ico")
 
-if os.path.exists("NewSystem2.db"):
-    conn = sqlite3.connect("NewSystem2.db")
-else:
-    conn = sqlite3.connect("NewSystem2.db")
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS accounts
-              (username text, password integer, email text, phno text)''')
-    conn.commit()
-    conn.close()
+
 
 bg = PhotoImage(file="C:/Users/HP/Desktop/PROJECT/images/air2.png")
 
@@ -56,6 +50,21 @@ cross_img = PhotoImage(file="C:/Users/HP/Desktop/PROJECT/images/cross.png")
 cross = Button(login2, border=0, bg = "#151E2E", image=cross_img, command=close)
 cross.place(x=720, y=0, relheight=0.08, relwidth=0.06)
 
+#####---------------------------------------------
+def on_enter(e):
+    id_entry.delete(0,'end')
+def on_leave(e):
+    if id_entry.get()=='':
+        id_entry.insert(0,'ID')
+
+id_entry = Entry(frm, text='ID', border=0,width=20,bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+id_entry.place(x=105, y=135)
+id_entry.insert(0,'ID')
+id_entry.bind("<FocusIn>", on_enter)
+id_entry.bind("<FocusOut>", on_leave)
+
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=155)
+
 
 #####---------------------------------------------
 def on_enter(e):
@@ -64,78 +73,91 @@ def on_leave(e):
     if username.get()=='':
         username.insert(0,'USERNAME')
 
-username = Entry(frm, text="USERNAME", border=0,width=20,bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-username.place(x=105, y=145)
+username = Entry(frm, text='USERNAME', border=0,width=20,bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+username.place(x=105, y=190)
 username.insert(0,'USERNAME')
 username.bind("<FocusIn>", on_enter)
 username.bind("<FocusOut>", on_leave)
 
-Frame(frm, width=240, height=2, bg="black").place(x=95,y=175)
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=210)
 
 #####---------------------------------------------
 
 def on_enter(e):
-    email.delete(0,'end')
+    email_entry.delete(0,'end')
 def on_leave(e):
-    if email.get()=='':
-        email.insert(0,'E-MAIL')
+    if email_entry.get()=='':
+        email_entry.insert(0,'E-MAIL')
 
-email = Entry(frm, text="E-MAIL", border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-email.place(x=105, y=200)
-email.insert(0,'E-MAIL')
-email.bind("<FocusIn>", on_enter)
-email.bind("<FocusOut>", on_leave)
+email_entry = Entry(frm, tex='E-MAIL', border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+email_entry.place(x=105, y=245)
+email_entry.insert(0,'E-MAIL')
+email_entry.bind("<FocusIn>", on_enter)
+email_entry.bind("<FocusOut>", on_leave)
 
-Frame(frm, width=240, height=2, bg="black").place(x=95,y=230)
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=265)
 
 #####---------------------------------------------
 
 
 def on_enter(e):
-    phno.delete(0,'end')
+    phno_entry.delete(0,'end')
 def on_leave(e):
-    if phno.get()=='+977 - ':
-        phno.insert(0,'+977 - ')
+    if phno_entry.get()=='+977 - ':
+        phno_entry.insert(0,'+977 - ')
 
-phno = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-phno.place(x=105, y=255)
-phno.insert(0,'+977 - ')
-phno.bind("<FocusIn>", on_enter)
-phno.bind("<FocusOut>", on_leave)
+phno_entry = Entry(frm, text='+977 - ', border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+phno_entry.place(x=105, y=305)
+phno_entry.insert(0,'+977 - ')
+phno_entry.bind("<FocusIn>", on_enter)
+phno_entry.bind("<FocusOut>", on_leave)
 
-Frame(frm, width=240, height=2, bg="black").place(x=95,y=285)
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=325)
 
 #####---------------------------------------------
 
 def on_enter(e):
-    password.delete(0,'end')
+    password_entry.delete(0,'end')
 def on_leave(e):
-    if password.get()=='':
-        password.insert(0,'PASSWORD')
+    if password_entry.get()=='':
+        password_entry.insert(0,'PASSWORD')
 
-password = Entry(frm, text="PASSWORD", border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-password.place(x=105, y=315)
-password.insert(0,'PASSWORD')
-password.bind("<FocusIn>", on_enter)
-password.bind("<FocusOut>", on_leave)
+password_entry = Entry(frm, text='PASSWORD', border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+password_entry.place(x=105, y=360)
+password_entry.insert(0,'PASSWORD')
+password_entry.bind("<FocusIn>", on_enter)
+password_entry.bind("<FocusOut>", on_leave)
 
-Frame(frm, width=240, height=2, bg="black").place(x=95,y=345)
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=380)
 
 
 #####---------------------------------------------
 
 def signup():
-    conn = sqlite3.connect("NewSystem2.db")
-    c = conn.cursor()
-    c.execute("INSERT INTO accounts VALUES (?, ?, ?, ?)", [username.get(), password.get(), email.get(), phno.get()])
-    conn.commit()
-    conn.close()
+    #conn = sqlite3.connect("NewSystem3.db")
+    #c = conn.cursor()
+    #c.execute("INSERT INTO accounts VALUES (?, ?, ?, ?, ?)", [id.get(), username.get(), password.get(), email.get(), phno.get()])
+    #conn.commit()
+    #conn.close()
 
-    print("Account added")
+    id = id_entry.get()
+    name = username.get()
+    email = email_entry.get()
+    phno = phno_entry.get()
+    password = password_entry.get()
+
+    if not (id and name and email and phno and password):
+        messagebox.showerror('Error', 'Enter all fields.')
+    elif database.id_exists(id):
+        messagebox.showerror('Error', 'ID already exists.')
+    else:
+        database.insert_customer(id, name, email, phno, password)
+        messagebox.showinfo('Success','Customer has been registerd.')
+    #print("Account added")
 
 
 loginl = Button(frm, text="Sign Up", border=0, fg="white", bg="#57a1f8",width=20, height=0, font=("Microsoft Yahei UI light",15,'bold'), command=signup)
-loginl.place(x=90, y=400)
+loginl.place(x=90, y=410)
 
 def logina():
     login2.destroy()
