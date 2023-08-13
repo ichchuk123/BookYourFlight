@@ -77,7 +77,7 @@ class Gui:
 
         def log():
             home.destroy()
-            import logintest
+            import login2
 
         loginb = Button(home, text="Log In", border=0, fg="white", bg="#57a1f8",width=10, height=0, font=("Microsoft Yahei UI light",18,'bold'), command=log)
         loginb.place(x=1275, y=50)

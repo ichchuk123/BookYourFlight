@@ -4,6 +4,15 @@ import sqlite3
 import os
 
 
+
+login = Tk()
+
+login.overrideredirect(1)
+login.title("BookYourFlight")
+login.geometry("800x600")
+login.resizable(0,0)
+login.wm_attributes("-transparentcolor", "grey")
+
 if os.path.exists("NewSystem2.db"):
     conn = sqlite3.connect("NewSystem2.db")
 else:
@@ -13,14 +22,6 @@ else:
               (username text, password integer, email text, phno text)''')
     conn.commit()
     conn.close()
-
-login = Tk()
-
-login.overrideredirect(1)
-login.title("BookYourFlight")
-login.geometry("800x600")
-login.resizable(0,0)
-login.wm_attributes("-transparentcolor", "grey")
 
 
 top_label = Label(login, bg="black", width=1000, height=5)
