@@ -84,18 +84,36 @@ Frame(frm, width=240, height=2, bg="black").place(x=95,y=210)
 #####---------------------------------------------
 
 def on_enter(e):
+    password_entry.delete(0,'end')
+def on_leave(e):
+    if password_entry.get()=='':
+        password_entry.insert(0,'PASSWORD')
+
+password_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
+password_entry.place(x=105, y=245)
+password_entry.insert(0,'PASSWORD')
+password_entry.bind("<FocusIn>", on_enter)
+password_entry.bind("<FocusOut>", on_leave)
+
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=265)
+
+
+#####---------------------------------------------
+
+
+def on_enter(e):
     email_entry.delete(0,'end')
 def on_leave(e):
     if email_entry.get()=='':
         email_entry.insert(0,'E-MAIL')
 
 email_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-email_entry.place(x=105, y=245)
+email_entry.place(x=105, y=305)
 email_entry.insert(0,'E-MAIL')
 email_entry.bind("<FocusIn>", on_enter)
 email_entry.bind("<FocusOut>", on_leave)
 
-Frame(frm, width=240, height=2, bg="black").place(x=95,y=265)
+Frame(frm, width=240, height=2, bg="black").place(x=95,y=325)
 
 #####---------------------------------------------
 
@@ -107,31 +125,16 @@ def on_leave(e):
         phno_entry.insert(0,'+977 - ')
 
 phno_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-phno_entry.place(x=105, y=305)
+phno_entry.place(x=105, y=360)
 phno_entry.insert(0,'+977 - ')
 phno_entry.bind("<FocusIn>", on_enter)
 phno_entry.bind("<FocusOut>", on_leave)
-
-Frame(frm, width=240, height=2, bg="black").place(x=95,y=325)
-
-#####---------------------------------------------
-
-def on_enter(e):
-    password_entry.delete(0,'end')
-def on_leave(e):
-    if password_entry.get()=='':
-        password_entry.insert(0,'PASSWORD')
-
-password_entry = Entry(frm, border=0,width=20, bg='#f7f9fc', font=("Microsoft Yahei UI light",12))
-password_entry.place(x=105, y=360)
-password_entry.insert(0,'PASSWORD')
-password_entry.bind("<FocusIn>", on_enter)
-password_entry.bind("<FocusOut>", on_leave)
 
 Frame(frm, width=240, height=2, bg="black").place(x=95,y=380)
 
 
 #####---------------------------------------------
+
 
 def signup():
     #conn = sqlite3.connect("NewSystem3.db")
@@ -142,17 +145,20 @@ def signup():
 
     id = id_entry.get()
     name = username.get()
+    password = password_entry.get()
     email = email_entry.get()
     phno = phno_entry.get()
-    password = password_entry.get()
+    
 
     if not (id and name and email and phno and password):
         messagebox.showerror('Error', 'Enter all fields.')
     elif database.id_exists(id):
         messagebox.showerror('Error', 'ID already exists.')
     else:
-        database.insert_customer(id, name, email, phno, password)
+        database.insert_customer(id, name, password, email, phno)
         messagebox.showinfo('Success','Customer has been registerd.')
+        login2.destroy()
+        import logintest
     #print("Account added")
 
 

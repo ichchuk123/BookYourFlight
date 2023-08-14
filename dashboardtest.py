@@ -1,10 +1,10 @@
-
 from tkinter import*
 import requests
 from tkcalendar import *
 import sqlite3
 import os
 import database
+from tkinter import messagebox,messagebox
 
 dash = Tk()
 
@@ -21,6 +21,7 @@ shree = PhotoImage(file="images/shree.png")
 tara = PhotoImage(file="images/tara.png")
 saurya = PhotoImage(file="images/saurya.png")
 buddha = PhotoImage(file="images/buddha.png")
+line = PhotoImage(file="images/line.png")
 
 normal = PhotoImage(file="images/pd.png")
 
@@ -136,67 +137,76 @@ def ticket_book():
         frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
         frm.place(x=270, y=25)
 
-        choose = Label(frm, text="Choose date and time for your booking :", bg="white", fg="#172233", border=0, font=("Microsoft Yahei UI light", 30))
+        choose = Label(frm, text="Fill your personal details", bg="white", fg="#172233", border=0, font=("Microsoft Yahei UI light", 30))
         choose.place(x=75, y=50)
-#       
 
-        global cal
+        nameLabel = Label(frm, text="Name :", width=10, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        nameLabel.place(x=100, y=150)
+
+        nameEntry = Entry(frm, width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        nameEntry.place(x=450, y=150)
+
+        phnoLabel = Label(frm, text="Phone no :", width=10, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        phnoLabel.place(x=100, y=300)
+
+        phnoEntry = Entry(frm, width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        phnoEntry.place(x=450, y=300)
+
+        departure_date = Label(frm, text="Choose your date:", width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        departure_date.place(x=50, y=450)
+
+        #boarding_time = Label(frm, text="Choose your time:", width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        #boarding_time.place(x=50, y=600)
+
         cal = Calendar(frm, font="Arial 18", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=10)
-        cal.place(x=210, y=150)
-#
-        timeLabel = Label(frm, text="Time :", width=5, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 15))
-        timeLabel.place(x=310, y=460)
-#
-        time = Entry(frm, bg="black", fg="white", width=10, border=0, font=("Microsoft Yahei UI light", 15))
-        time.place(x=380, y=460)
-        my_label = Label(frm, fg="#57a1f8", bg="white", text="")
-    #
+        cal.place(x=250, y=450)
+
+        #my_label = Label(frm, fg="#57a1f8", bg="white", text="")
+    ##
         def get_dates():
-            if time.get()==False:
-                Label(frm, text="You must enter time", font=("Microsoft Yahei UI light", 15, 'bold')).place(x=150, y=520)
-            my_label.config(text="Your Date: " + cal.get_date() + " and time: " + time.get(), font=("Microsoft Yahei UI light", 15, 'bold'))
-
-            frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
-            frm.place(x=270, y=25)
-
-            normalLabel = Label(frm, text="Your ticket is here :", bg="white", border=0,font=("Microsoft Yahei UI light", 25, 'bold'))
-            normalLabel.place(x=100, y=100)
-
-
-            normalLabel = Label(frm, image=normal, bg="black", border=1)
-            normalLabel.place(x=150, y=200)
-
-            name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-            name.place(x=30, y=100)
-
-            seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-            seat.place(x=165, y=100)
-
-            boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-            boardingtime.place(x=160, y=165)
-
-            flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-            flight.place(x=35, y=165)
-
-            date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-            date.place(x=30, y=215)
-
-            destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-            destination.place(x=160, y=215)
             
-                    
+            my_label.config(text="Your Date: " + cal.get_date())
 
-            
+        get_date = Button(frm, text="Get date", fg="#57a1f8", bg="white", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
+        get_date.place(x=300, y=750)
 
-            my_label.place(x=150, y=550)
-
-
-    #
-        confirm = Button(frm, text="CONFIRM DATA", border=0, fg="white", bg="#57a1f8",width=15, height=0, font=("Microsoft Yahei UI light",18,'bold'), command=get_dates)
-        confirm.place(x=350, y=570)
+        my_label = Label(frm, fg="#57a1f8", bg="white", text="")
+        my_label.place(x=250, y=900)
 
         
-        
+
+        #    frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
+        #    frm.place(x=270, y=25)
+#
+        #    normalLabel = Label(frm, text="Your ticket is here :", bg="white", border=0,font=("Microsoft Yahei UI light", 25, 'bold'))
+        #    normalLabel.place(x=100, y=100)
+#
+#
+        #    normalLabel = Label(frm, image=normal, bg="black", border=1)
+        #    normalLabel.place(x=150, y=200)
+#
+        #    name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+        #    name.place(x=30, y=100)
+#
+        #    seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+        #    seat.place(x=165, y=100)
+#
+        #    boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+        #    boardingtime.place(x=160, y=165)
+#
+        #    flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+        #    flight.place(x=35, y=165)
+#
+        #    date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+        #    date.place(x=30, y=215)
+#
+        #    destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+        #    destination.place(x=160, y=215)
+        #
+        #    my_label.place(x=150, y=550)
+#
+        #confirm = Button(frm, text="CONFIRM DATA", border=0, fg="white", bg="#57a1f8",width=15, height=0, font=("Microsoft Yahei UI light",18,'bold'), command=get_dates)
+        #confirm.place(x=350, y=570)
 
     yetiLabel = Button(frm, border=0, bg="white", image=yeti, command=open_window)
     yetiLabel.place(x=50, y=140, relheight=0.19, relwidth=0.32)
@@ -243,53 +253,109 @@ def open_settings():
     Username = Label(settingsfrm, text="Ram", bg="#161616", fg="white", border=0, font=("Microsoft Yahei UI light", 25))
     Username.place(x=280, y=95)
 
-    def edit_update_username():
-        username = displayNameEntry.get()
-        password = displayPasswordEntry.get()
-        email = displayEmailEntry.get()
-        phno = displayPhoneEntry.get()
-        database.update_customer(username, password, email, phno)
-
+    
     ########################################################################################################
+    infoLabel = Label(settingsfrm, text="Personal Details", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 20))
+    infoLabel.place(x=200, y=190)
+
+    idLabel = Label(settingsfrm, text="Id no.", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    idLabel.place(x=200, y=240)
+
+    idEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    idEntry.place(x=190, y=270)
 
     displayName = Label(settingsfrm, text="Username", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    displayName.place(x=200, y=210)
+    displayName.place(x=200, y=320)
 
-    displayNameEntry = Entry(settingsfrm, bg="#48484a", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    displayNameEntry.place(x=200, y=240)
-
+    displayNameEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    displayNameEntry.place(x=190, y=350)
     
-
     ########################################################################################################
 
     phoneName = Label(settingsfrm, text="Phone no.", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    phoneName.place(x=200, y=330)
+    phoneName.place(x=200, y=410)
 
-    displayPhoneEntry = Entry(settingsfrm, bg="#48484a", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    displayPhoneEntry.place(x=200, y=360)
-
- 
+    displayPhoneEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    displayPhoneEntry.place(x=190, y=440)
 
     ########################################################################################################
 
     emailName = Label(settingsfrm, text="Email", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    emailName.place(x=200, y=450)
+    emailName.place(x=200, y=510)
 
-    displayEmailEntry = Entry(settingsfrm, bg="#48484a", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    displayEmailEntry.place(x=200, y=480)
-
+    displayEmailEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    displayEmailEntry.place(x=190, y=540)
 
     ########################################################################################################
 
     passwordName = Label(settingsfrm, text="Password", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    passwordName.place(x=200, y=570)
+    passwordName.place(x=200, y=610)
 
-    displayPasswordEntry = Entry(settingsfrm,  bg="#48484a", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    displayPasswordEntry.place(x=200, y=600)
+    displayPasswordEntry = Entry(settingsfrm,  bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    displayPasswordEntry.place(x=190, y=640)
 
+    ########################################################################################################
+    
+    ########################################################################################################
+    def edit_update():
+        username = displayNameEntry.get()
+        password = displayPasswordEntry.get()
+        email = displayEmailEntry.get()
+        phno = displayPhoneEntry.get()
+        id = idEntry.get()
+        if not (username and password and email and phno and id):
+            messagebox.showerror("Error","Enter all your details")
+        else:
+            database.update_customer(username, password, email, phno, id)
+            messagebox.showinfo("Success", "Successfully updated")
+    
+    def edit_delete():
+        id = idEntry.get()
+        if not (id):
+            messagebox.showerror("Error","Enter your id")
+        else:
+            database.delete_customer(id)
+            messagebox.showinfo("Success", "Successfully deleted")
+            dash.destroy()
+            import logintest
 
-    Button(settingsfrm, text="Update", bg="#57a1f8", fg="white", border=0, font=("Uni Sans Heavy", 18), command=edit_update_username).place(x=450, y=750)
-    Button(settingsfrm, text="Delete", bg="red", fg="white", border=0, font=("Uni Sans Heavy", 18)).place(x=600, y=750)
+    Button(settingsfrm, text="Update", bg="#57a1f8", fg="white", border=0, font=("Uni Sans Heavy", 18), command=edit_update).place(x=170, y=720)
+    Button(settingsfrm, text="Delete Your Account", bg="red", fg="white", border=0, width=16, font=("Uni Sans Heavy", 18), command=edit_delete).place(x=290, y=720)
+
+    ########################################################################################################
+    
+    middleLabel = Label(settingsfrm, image=line, bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    middleLabel.place(x=540, y=210, relwidth=0.1, relheight=0.64)
+
+    ########################################################################################################
+
+    flightInfo = Label(settingsfrm, text="Flight Details", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 20))
+    flightInfo.place(x=750, y=190)
+
+    flightIdLabel = Label(settingsfrm, text="Flight ID", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    flightIdLabel.place(x=700, y=245)
+
+    flightIdEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    flightIdEntry.place(x=690, y=280)
+
+    seatNumLabel = Label(settingsfrm, text="Seat no.", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    seatNumLabel.place(x=700, y=365)
+
+    seatNumEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    seatNumEntry.place(x=690, y=395)
+#
+    boardingTimeLabel = Label(settingsfrm, text="Boarding Time", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    boardingTimeLabel.place(x=700, y=480)
+
+    boardingTimeEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    boardingTimeEntry.place(x=690, y=520)
+
+    departureDateLabel = Label(settingsfrm, text="Departure Date", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    departureDateLabel.place(x=700, y=600)
+
+    departureDateEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    departureDateEntry.place(x=690, y=640)
+
 
 settings = Button(dash, text="Settings", bg="#172233", fg="white", border=0, font=("Sans Serif", 16), command=open_settings)
 settings.place(x=75, y=450)
