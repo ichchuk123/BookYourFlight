@@ -48,8 +48,17 @@ afrm.place(x=100, y=150)
 ticketLabel = Label(frm, text="Your ticket :", bg="white", fg="#172233", font=("Microsoft Yahei UI light", 20, "bold"))
 ticketLabel.place(x=100, y=350)
 
+global normalLabel
 normalLabel = Label(frm, image=normal, bg="black", border=1)
 normalLabel.place(x=150, y=420)
+
+
+global name
+global seat
+global boardingtime
+global flight
+global date
+global destination
 
 name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
 name.place(x=30, y=100)
@@ -68,6 +77,8 @@ date.place(x=30, y=215)
 
 destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
 destination.place(x=160, y=215)
+
+
 
 fm1 = Label(afrm, bg="#f2f2f2", width=130, height=10)
 fm1.place(x=65, y=10)
@@ -201,6 +212,12 @@ def ticket_book():
             ticketId = Label(frm, text="Ticket ID", width=10, bg="white", fg="black", border=0, font=("Uni Sans Thin CAPS", 22))
             ticketId.place(x=50, y=240) 
 
+            conn = sqlite3.connect("NewSystem3.db")
+            c = conn.cursor()
+            c.execute('''SELECT flight_id from flightticket''')
+            conn.commit()
+            conn.close()
+
             flightIdEntry = Entry(frm, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
             flightIdEntry.place(x=250, y=240) 
 
@@ -210,15 +227,34 @@ def ticket_book():
             seatEntry = Entry(frm, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
             seatEntry.place(x=250, y=320) 
 
-            normalLabel = Label(frm, image=normal, bg="black", border=1)
-            normalLabel.place(x=150, y=400)
-            
             nameinfo = nameEntry.get()
             phnoinfo = phnoEntry.get()
             seatinfo = seatEntry.get()
             timeinfo = boarding_time_entry.get()
             dateinfo = my_label.get()
             destinationinfo = destination_entry.get()
+
+            normalLabel = Label(frm, image=normal, bg="black", border=1)
+            normalLabel.place(x=150, y=400)
+
+            name = Label(normalLabel, bg="black", fg="white", height=1, text=nameinfo, border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            name.place(x=30, y=100)
+
+            seat = Label(normalLabel, bg="black", fg="white", height=1, text=seatinfo, border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            seat.place(x=165, y=100)
+
+            boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text=timeinfo, border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            boardingtime.place(x=160, y=165)
+
+            flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            flight.place(x=35, y=165)
+
+            date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            date.place(x=30, y=215)
+
+            destination = Label(normalLabel, bg="black", fg="white", height=1, text=destinationinfo, border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+            destination.place(x=160, y=215)
+ 
 
             def confirmdata():
                 if not (nameinfo and phnoinfo and seatinfo and timeinfo and dateinfo and destinationinfo):
