@@ -60,7 +60,7 @@ global flight
 global date
 global destination
 
-name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+name = Label(normalLabel, bg="black", fg="white", height=1, text="ganga", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
 name.place(x=30, y=100)
 
 seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
@@ -312,7 +312,7 @@ def open_settings():
     pp_Label.place(x=120, y=55, relheight=0.6, relwidth=0.1)
 
     
-    Username = Label(settingsfrm, text="Ram", bg="#161616", fg="white", border=0, font=("Microsoft Yahei UI light", 25))
+    Username = Label(settingsfrm, text="ganga", bg="#161616", fg="white", border=0, font=("Microsoft Yahei UI light", 25))
     Username.place(x=280, y=95)
 
     
