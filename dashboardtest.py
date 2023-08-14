@@ -5,6 +5,7 @@ import sqlite3
 import os
 import database
 from tkinter import messagebox,messagebox
+import random
 
 def get_dates():
     selected_date = cal.get_date()
@@ -218,13 +219,16 @@ def ticket_book():
             conn.commit()
             conn.close()
 
-            flightIdEntry = Entry(frm, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
+            ticket_random = random.randint(100,200)
+            seat_random = random.randint(0,50)
+
+            flightIdEntry = Label(frm, width=10, text=ticket_random, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
             flightIdEntry.place(x=250, y=240) 
 
             seatLabel = Label(frm, text="Seat no.", width=10, bg="white", fg="black", border=0, font=("Uni Sans Thin CAPS", 22))
             seatLabel.place(x=50, y=320) 
 
-            seatEntry = Entry(frm, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
+            seatEntry = Label(frm, text=seat_random, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
             seatEntry.place(x=250, y=320) 
 
             nameinfo = nameEntry.get()
