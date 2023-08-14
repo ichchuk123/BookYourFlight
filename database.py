@@ -13,11 +13,18 @@ def create_table():
 def create_table_flight():
         conn = sqlite3.connect("NewSystem3.db")
         c = conn.cursor()
-        c.execute('''CREATE TABLE IF NOT EXISTS flight
-                  (flight_id TEXT PRIMARY KEY, passenger_name text, passenger_phno text, seat integer, boarding_time text, departure_date text)''')
+        c.execute('''CREATE TABLE IF NOT EXISTS flightticket
+                  (flight_id INTEGER PRIMARY KEY AUTOINCREMENT, passenger_name text, passenger_phno text, seat integer, boarding_time text, departure_date text, destination text)''')
         conn.commit()
         conn.close()
 
+def add_flight(name, p_phno, seat, time, date, destination):
+        conn = sqlite3.connect("NewSystem3.db")
+        c = conn.cursor()
+        c.execute('''INSERT INTO flightticket
+                  (passenger_name, passenger_phno, seat, boarding_time, departure_date, destination) VALUES (?,?,?,?,?,?,?)''', (name, p_phno, seat, time, date, destination))
+        conn.commit()
+        conn.close()
 
 def for_login(username, password):
         conn = sqlite3.connect("NewSystem3.db")

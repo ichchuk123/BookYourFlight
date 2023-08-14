@@ -6,6 +6,10 @@ import os
 import database
 from tkinter import messagebox,messagebox
 
+def get_dates():
+    selected_date = cal.get_date()
+    my_label.config(border=0,text="Your Date: " + selected_date)
+
 dash = Tk()
 
 dash.title("Dashboard")
@@ -23,7 +27,7 @@ saurya = PhotoImage(file="images/saurya.png")
 buddha = PhotoImage(file="images/buddha.png")
 line = PhotoImage(file="images/line.png")
 
-normal = PhotoImage(file="images/pd.png")
+normal = PhotoImage(file="images/yeti air ticket-1.png")
 
 frame = PhotoImage(file="images/frame.png")
 frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
@@ -67,49 +71,49 @@ destination.place(x=160, y=215)
 
 fm1 = Label(afrm, bg="#f2f2f2", width=130, height=10)
 fm1.place(x=65, y=10)
-
-location = "kathmandu"
-weather_data = requests.get(
-    f"https://api.openweathermap.org/data/2.5/weather?q={location}&units=imperial&APPID={api_key}")
-
-if weather_data.json()['cod'] == '404':
-    print("No City Found")
-else:
-    weather = weather_data.json()['weather'][0]['main']
-    temp = round(weather_data.json()['main']['temp'])
-    celcius1 = (temp - 32) * 5 / 9
-    celcius = round(celcius1, 1)
-
-
-weather_frame = Frame(afrm, bg="#f2f2f2", width=1050, height=180)
-weather_frame.place(x=0, y=0)
-
-location1 = Label(weather_frame, text=("Kathmandu, Nepal"), bg="#f2f2f2", fg="black", width=20, height=2, font=("Arial", 20, "bold"))
-location1.place(x=40, y=100)
-
-weather_icon_frame = Frame(weather_frame, bg="#f2f2f2", width=120, height=120)
-weather_icon_frame.place(x=630, y=10)
-
-if weather == "Clouds":
-    cloud1 = PhotoImage(file="images/cloud2.png")
-    cloud1_label = Label(weather_icon_frame, bg="#f2f2f2", image=cloud1)
-    cloud1_label.place(x=10, y=20, relheight=1, relwidth=1)
-elif weather == "Rain":
-    rain_icon = PhotoImage(file="images/rain.png")
-    rain_label = Label(weather_icon_frame, bg="#f2f2f2", image=rain_icon)
-    rain_label.place(x=0, y=0, relheight=1, relwidth=1)
-
-display_ = Label(weather_frame, text=weather, bg="#f2f2f2", fg="black", width=10, height=2, font=("Arial", 30, "bold"))
-display_.place(x=375, y=45)
-
-display2 = Label(weather_frame, text=celcius, bg="#f2f2f2", fg="black", width=4, height=1, font=("Arial", 55, "bold"))
-display2.place(x=85, y=20)
-
-celciusDisplay = Label(weather_frame, text="\u00b0C", bg="#f2f2f2", fg="black", width=2, height=1, font=("Arial", 40, "bold"))
-celciusDisplay.place(x=260, y=35)
-
-weather_frame.update()  # Update the frame to make sure its contents are displayed
-
+##
+#location = "kathmandu"
+#weather_data = requests.get(
+#    f"https://api.openweathermap.org/data/2.5/weather?q={location}&units=imperial&APPID={api_key}")
+#
+#if weather_data.json()['cod'] == '404':
+#    print("No City Found")
+#else:
+#    weather = weather_data.json()['weather'][0]['main']
+#    temp = round(weather_data.json()['main']['temp'])
+#    celcius1 = (temp - 32) * 5 / 9
+#    celcius = round(celcius1, 1)
+#
+#
+#weather_frame = Frame(afrm, bg="#f2f2f2", width=1050, height=180)
+#weather_frame.place(x=0, y=0)
+#
+#location1 = Label(weather_frame, text=("Kathmandu, Nepal"), bg="#f2f2f2", fg="black", width=20, height=2, font=("Arial", 20, "bold"))
+#location1.place(x=40, y=100)
+#
+#weather_icon_frame = Frame(weather_frame, bg="#f2f2f2", width=120, height=120)
+#weather_icon_frame.place(x=630, y=10)
+#
+#if weather == "Clouds":
+#    cloud1 = PhotoImage(file="images/cloud2.png")
+#    cloud1_label = Label(weather_icon_frame, bg="#f2f2f2", image=cloud1)
+#    cloud1_label.place(x=10, y=20, relheight=1, relwidth=1)
+#elif weather == "Rain":
+#    rain_icon = PhotoImage(file="images/rain.png")
+#    rain_label = Label(weather_icon_frame, bg="#f2f2f2", image=rain_icon)
+#    rain_label.place(x=0, y=0, relheight=1, relwidth=1)
+#
+#display_ = Label(weather_frame, text=weather, bg="#f2f2f2", fg="black", width=10, height=2, font=("Arial", 30, "bold"))
+#display_.place(x=375, y=45)
+#
+#display2 = Label(weather_frame, text=celcius, bg="#f2f2f2", fg="black", width=4, height=1, font=("Arial", 55, "bold"))
+#display2.place(x=85, y=20)
+#
+#celciusDisplay = Label(weather_frame, text="\u00b0C", bg="#f2f2f2", fg="black", width=2, height=1, font=("Arial", 40, "bold"))
+#celciusDisplay.place(x=260, y=35)
+#
+#weather_frame.update()  # Update the frame to make sure its contents are displayed
+##
 logo = PhotoImage(file="images/planebg1.png")
 logo_label = Label(dash, bg="#172233", image=logo)
 logo_label.place(x=50, y=50, relwidth=0.1, relheight=0.1)
@@ -127,6 +131,7 @@ dashboard = Button(dash, text="Dashboard", bg="#172233", fg="white", border=0, f
 dashboard.place(x=75, y=250)
 
 def ticket_book():
+    
     frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
     frm.place(x=270, y=25)  
 
@@ -140,73 +145,93 @@ def ticket_book():
         choose = Label(frm, text="Fill your personal details", bg="white", fg="#172233", border=0, font=("Microsoft Yahei UI light", 30))
         choose.place(x=75, y=50)
 
-        nameLabel = Label(frm, text="Name :", width=10, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        nameLabel = Label(frm, text="Name :", width=10, bg="white", fg="black", border=0, font=("Microsoft Yahei UI light", 20))
         nameLabel.place(x=100, y=150)
 
-        nameEntry = Entry(frm, width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
+        nameEntry = Entry(frm, width=20, bg="white", fg="black", border=1, font=("Microsoft Yahei UI light", 20))
         nameEntry.place(x=450, y=150)
 
-        phnoLabel = Label(frm, text="Phone no :", width=10, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
-        phnoLabel.place(x=100, y=300)
+        phnoLabel = Label(frm, text="Phone no :", width=10, bg="white", fg="black", border=0, font=("Microsoft Yahei UI light", 20))
+        phnoLabel.place(x=100, y=250)
 
-        phnoEntry = Entry(frm, width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
-        phnoEntry.place(x=450, y=300)
+        phnoEntry = Entry(frm, width=20, bg="white", fg="black", border=1, font=("Microsoft Yahei UI light", 20))
+        phnoEntry.place(x=450, y=250)
 
-        departure_date = Label(frm, text="Choose your date:", width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
-        departure_date.place(x=50, y=450)
+        departure_date = Label(frm, text="Choose your date:", width=20, bg="white", fg="black", border=0, font=("Microsoft Yahei UI light", 20))
+        departure_date.place(x=50, y=350)
 
-        #boarding_time = Label(frm, text="Choose your time:", width=20, bg="black", fg="white", border=0, font=("Microsoft Yahei UI light", 20))
-        #boarding_time.place(x=50, y=600)
+        boarding_time = Label(frm, text="Your Preffered Time:", width=20, bg="white", fg="black", border=0, font=("Microsoft Yahei UI light", 20))
+        boarding_time.place(x=450, y=345)
 
-        cal = Calendar(frm, font="Arial 18", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=10)
-        cal.place(x=250, y=450)
+        boarding_time_entry = Entry(frm, width=20, bg="white", fg="black", border=1, font=("Microsoft Yahei UI light", 20))
+        boarding_time_entry.place(x=450, y=420)
 
-        #my_label = Label(frm, fg="#57a1f8", bg="white", text="")
-    ##
-        def get_dates():
+        destinationLabel = Label(frm, text="Your Destination:", width=20, bg="white", fg="black", border=0, font=("Microsoft Yahei UI light", 20))
+        destinationLabel.place(x=850, y=345)
+
+        destination_entry = Entry(frm, width=20, bg="white", fg="black", border=1, font=("Microsoft Yahei UI light", 20))
+        destination_entry.place(x=850, y=420)
+       
+        cal = Calendar(frm, font="Arial 15", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=10)
+        cal.place(x=30, y=420)
             
-            my_label.config(text="Your Date: " + cal.get_date())
+        get_date = Button(frm, text="Get date", fg="white", bg="#57a1f8", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
+        get_date.place(x=150, y=700)
 
-        get_date = Button(frm, text="Get date", fg="#57a1f8", bg="white", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
-        get_date.place(x=300, y=750)
-
+        global my_label
         my_label = Label(frm, fg="#57a1f8", bg="white", text="")
-        my_label.place(x=250, y=900)
+        my_label.place(x=120, y=750)
 
         
 
-        #    frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
-        #    frm.place(x=270, y=25)
-#
-        #    normalLabel = Label(frm, text="Your ticket is here :", bg="white", border=0,font=("Microsoft Yahei UI light", 25, 'bold'))
-        #    normalLabel.place(x=100, y=100)
-#
-#
-        #    normalLabel = Label(frm, image=normal, bg="black", border=1)
-        #    normalLabel.place(x=150, y=200)
-#
-        #    name = Label(normalLabel, bg="black", fg="white", height=1, text="Ram", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-        #    name.place(x=30, y=100)
-#
-        #    seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-        #    seat.place(x=165, y=100)
-#
-        #    boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-        #    boardingtime.place(x=160, y=165)
-#
-        #    flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-        #    flight.place(x=35, y=165)
-#
-        #    date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-        #    date.place(x=30, y=215)
-#
-        #    destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-        #    destination.place(x=160, y=215)
-        #
-        #    my_label.place(x=150, y=550)
-#
-        #confirm = Button(frm, text="CONFIRM DATA", border=0, fg="white", bg="#57a1f8",width=15, height=0, font=("Microsoft Yahei UI light",18,'bold'), command=get_dates)
-        #confirm.place(x=350, y=570)
+        def confirm():
+            frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
+            frm.place(x=270, y=25) 
+
+            global seatEntry
+            info = '''"Congratulations, We have selected ticket 
+            That suits best for you"'''
+
+            global seatEntry
+
+            displayLabel = Label(frm, text=info, width=35, bg="white", fg="red", border=0, font=("Uni Sans Thin CAPS", 22))
+            displayLabel.place(x=270, y=90)
+
+            ticketId = Label(frm, text="Ticket ID", width=10, bg="white", fg="black", border=0, font=("Uni Sans Thin CAPS", 22))
+            ticketId.place(x=50, y=240) 
+
+            flightIdEntry = Entry(frm, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
+            flightIdEntry.place(x=250, y=240) 
+
+            seatLabel = Label(frm, text="Seat no.", width=10, bg="white", fg="black", border=0, font=("Uni Sans Thin CAPS", 22))
+            seatLabel.place(x=50, y=320) 
+
+            seatEntry = Entry(frm, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
+            seatEntry.place(x=250, y=320) 
+
+            normalLabel = Label(frm, image=normal, bg="black", border=1)
+            normalLabel.place(x=150, y=400)
+            
+            nameinfo = nameEntry.get()
+            phnoinfo = phnoEntry.get()
+            seatinfo = seatEntry.get()
+            timeinfo = boarding_time_entry.get()
+            dateinfo = my_label.get()
+            destinationinfo = destination_entry.get()
+
+            def confirmdata():
+                if not (nameinfo and phnoinfo and seatinfo and timeinfo and dateinfo and destinationinfo):
+                    messagebox.showerror("Error","Enter all your details")
+                else:
+                    database.add_flight(nameinfo, phnoinfo, seatinfo, timeinfo, dateinfo, destinationinfo)
+                    messagebox.showinfo("Success", "Successfully updated")    
+
+            confirmInfoLabel = Button(frm, text="Confirm", width=10, bg="#57a1f8", fg="black", border=0, font=("Uni Sans Thin CAPS", 22), command=confirmdata)
+            confirmInfoLabel.place(x=500, y=600) 
+       
+        confirmLabel = Button(frm, text="Confirm Details", width=15, bg="#57a1f8", fg="white", border=0, font=("Microsoft Yahei UI light", 20), command=confirm)
+        confirmLabel.place(x=500, y=700)
+        
 
     yetiLabel = Button(frm, border=0, bg="white", image=yeti, command=open_window)
     yetiLabel.place(x=50, y=140, relheight=0.19, relwidth=0.32)
