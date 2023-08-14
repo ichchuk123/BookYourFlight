@@ -113,13 +113,10 @@ eye_close = Button(frm, image=bg_eye1, border=0,bg='#f7f9fc', command=close_eye)
 
 #####---------------------------------------------
 def logN():
-    conn = sqlite3.connect("NewSystem3.db")
-    c = conn.cursor()
-    c.execute('SELECT * FROM accounts WHERE username = ? and password = ?', [(username,password,)])
-    if c.fetchone() == None:
-        messagebox.showinfo("Success","Successfully Logged IN")
-    else:
-        messagebox.showerror("Error","Incorrect credentials")
+    database.fetch_data()
+    login.destroy()
+    import dashboardtest
+
 
 loginl = Button(frm, text="Log In", border=0, fg="white", bg="#57a1f8",width=20, height=0, font=("Microsoft Yahei UI light",15,'bold'), command=logN)
 loginl.place(x=35, y=190)

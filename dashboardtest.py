@@ -71,49 +71,50 @@ destination.place(x=160, y=215)
 
 fm1 = Label(afrm, bg="#f2f2f2", width=130, height=10)
 fm1.place(x=65, y=10)
-##
-#location = "kathmandu"
-#weather_data = requests.get(
-#    f"https://api.openweathermap.org/data/2.5/weather?q={location}&units=imperial&APPID={api_key}")
+
+location = "kathmandu"
+weather_data = requests.get(
+    f"https://api.openweathermap.org/data/2.5/weather?q={location}&units=imperial&APPID={api_key}")
+
+if weather_data.json()['cod'] == '404':
+    print("No City Found")
+else:
+    weather = weather_data.json()['weather'][0]['main']
+    temp = round(weather_data.json()['main']['temp'])
+    celcius1 = (temp - 32) * 5 / 9
+    celcius = round(celcius1, 1)
+
+
+weather_frame = Frame(afrm, bg="#f2f2f2", width=1050, height=180)
+weather_frame.place(x=0, y=0)
+
+location1 = Label(weather_frame, text=("Kathmandu, Nepal"), bg="#f2f2f2", fg="black", width=20, height=2, font=("Arial", 20, "bold"))
+location1.place(x=40, y=100)
+
+weather_icon_frame = Frame(weather_frame, bg="#f2f2f2", width=120, height=120)
+weather_icon_frame.place(x=630, y=10)
+
+if weather == "Clouds":
+    cloud1 = PhotoImage(file="images/cloud2.png")
+    cloud1_label = Label(weather_icon_frame, bg="#f2f2f2", image=cloud1)
+    cloud1_label.place(x=10, y=20, relheight=1, relwidth=1)
+elif weather == "Rain":
+    rain_icon = PhotoImage(file="images/rain.png")
+    rain_label = Label(weather_icon_frame, bg="#f2f2f2", image=rain_icon)
+    rain_label.place(x=0, y=0, relheight=1, relwidth=1)
+
+
+display_ = Label(weather_frame, text=weather, bg="#f2f2f2", fg="black", width=13, height=2, font=("Arial", 30, "bold"))
+display_.place(x=375, y=45)
+
+display2 = Label(weather_frame, text=celcius, bg="#f2f2f2", fg="black", width=4, height=1, font=("Arial", 55, "bold"))
+display2.place(x=85, y=20)
+
+celciusDisplay = Label(weather_frame, text="\u00b0C", bg="#f2f2f2", fg="black", width=2, height=1, font=("Arial", 40, "bold"))
+celciusDisplay.place(x=260, y=35)
+
+weather_frame.update()  # Update the frame to make sure its contents are displayed
 #
-#if weather_data.json()['cod'] == '404':
-#    print("No City Found")
-#else:
-#    weather = weather_data.json()['weather'][0]['main']
-#    temp = round(weather_data.json()['main']['temp'])
-#    celcius1 = (temp - 32) * 5 / 9
-#    celcius = round(celcius1, 1)
-#
-#
-#weather_frame = Frame(afrm, bg="#f2f2f2", width=1050, height=180)
-#weather_frame.place(x=0, y=0)
-#
-#location1 = Label(weather_frame, text=("Kathmandu, Nepal"), bg="#f2f2f2", fg="black", width=20, height=2, font=("Arial", 20, "bold"))
-#location1.place(x=40, y=100)
-#
-#weather_icon_frame = Frame(weather_frame, bg="#f2f2f2", width=120, height=120)
-#weather_icon_frame.place(x=630, y=10)
-#
-#if weather == "Clouds":
-#    cloud1 = PhotoImage(file="images/cloud2.png")
-#    cloud1_label = Label(weather_icon_frame, bg="#f2f2f2", image=cloud1)
-#    cloud1_label.place(x=10, y=20, relheight=1, relwidth=1)
-#elif weather == "Rain":
-#    rain_icon = PhotoImage(file="images/rain.png")
-#    rain_label = Label(weather_icon_frame, bg="#f2f2f2", image=rain_icon)
-#    rain_label.place(x=0, y=0, relheight=1, relwidth=1)
-#
-#display_ = Label(weather_frame, text=weather, bg="#f2f2f2", fg="black", width=10, height=2, font=("Arial", 30, "bold"))
-#display_.place(x=375, y=45)
-#
-#display2 = Label(weather_frame, text=celcius, bg="#f2f2f2", fg="black", width=4, height=1, font=("Arial", 55, "bold"))
-#display2.place(x=85, y=20)
-#
-#celciusDisplay = Label(weather_frame, text="\u00b0C", bg="#f2f2f2", fg="black", width=2, height=1, font=("Arial", 40, "bold"))
-#celciusDisplay.place(x=260, y=35)
-#
-#weather_frame.update()  # Update the frame to make sure its contents are displayed
-##
 logo = PhotoImage(file="images/planebg1.png")
 logo_label = Label(dash, bg="#172233", image=logo)
 logo_label.place(x=50, y=50, relwidth=0.1, relheight=0.1)
