@@ -54,30 +54,30 @@ normalLabel = Label(frm, image=normal, bg="black", border=1)
 normalLabel.place(x=150, y=420)
 
 
-global name
-global seat
-global boardingtime
-global flight
-global date
-global destination
-
-name = Label(normalLabel, bg="black", fg="white", height=1, text="ganga", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-name.place(x=30, y=100)
-
-seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-seat.place(x=165, y=100)
-
-boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-boardingtime.place(x=160, y=165)
-
-flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-flight.place(x=35, y=165)
-
-date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-date.place(x=30, y=215)
-
-destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
-destination.place(x=160, y=215)
+#global name
+#global seat
+#global boardingtime
+#global flight
+#global date
+#global destination
+#
+#name = Label(normalLabel, bg="black", fg="white", height=1, text="ganga", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+#name.place(x=30, y=100)
+#
+#seat = Label(normalLabel, bg="black", fg="white", height=1, text="B17", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+#seat.place(x=165, y=100)
+#
+#boardingtime = Label(normalLabel, bg="black", fg="white", height=1, text="00:45", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+#boardingtime.place(x=160, y=165)
+#
+#flight = Label(normalLabel, bg="black", fg="white", height=1, text="12", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+#flight.place(x=35, y=165)
+#
+#date = Label(normalLabel, bg="black", fg="white", height=1, text="8/13/2023", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+#date.place(x=30, y=215)
+#
+#destination = Label(normalLabel, bg="black", fg="white", height=1, text="Pokhara", border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
+#destination.place(x=160, y=215)
 
 
 
@@ -185,7 +185,7 @@ def ticket_book():
         destination_entry = Entry(frm, width=20, bg="white", fg="black", border=1, font=("Microsoft Yahei UI light", 20))
         destination_entry.place(x=850, y=420)
        
-        cal = Calendar(frm, font="Arial 15", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=10)
+        cal = Calendar(frm, font="Arial 15", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=15)
         cal.place(x=30, y=420)
 
         def get_dates():
@@ -222,6 +222,7 @@ def ticket_book():
             seatLabel = Label(frm, text="Seat no.", width=10, bg="white", fg="black", border=0, font=("Uni Sans Thin CAPS", 22))
             seatLabel.place(x=50, y=320) 
 
+            global ticketinfo
             ticketinfo = ticket_random
             nameinfo = nameEntry.get()
             phnoinfo = phnoEntry.get()
@@ -258,10 +259,10 @@ def ticket_book():
                     messagebox.showinfo("Success", "Successfully updated")    
 
             confirmInfoLabel = Button(frm, text="Confirm", width=10, bg="#57a1f8", fg="black", border=0, font=("Uni Sans Thin CAPS", 22), command=confirmdata)
-            confirmInfoLabel.place(x=500, y=650) 
+            confirmInfoLabel.place(x=500, y=720) 
 
-        get_date = Button(frm, text="Get date", fg="white", bg="#57a1f8", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
-        get_date.place(x=150, y=700)
+        confirm = Button(frm, text="Confirm Credentials", fg="white", bg="#57a1f8", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
+        confirm.place(x=500, y=700)
 
         #def confirm():
         #    frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
@@ -312,7 +313,7 @@ def open_settings():
     pp_Label.place(x=120, y=55, relheight=0.6, relwidth=0.1)
 
     
-    Username = Label(settingsfrm, text="ganga", bg="#161616", fg="white", border=0, font=("Microsoft Yahei UI light", 25))
+    Username = Label(settingsfrm, text="Your Details", bg="#161616", fg="white", border=0, font=("Microsoft Yahei UI light", 25))
     Username.place(x=280, y=95)
 
     
@@ -394,29 +395,76 @@ def open_settings():
     flightInfo = Label(settingsfrm, text="Flight Details", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 20))
     flightInfo.place(x=750, y=190)
 
-    flightIdLabel = Label(settingsfrm, text="Flight ID", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    flightIdLabel.place(x=700, y=245)
+    ticketIdLabel = Label(settingsfrm, text="Ticket ID", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    ticketIdLabel.place(x=700, y=245)
 
-    flightIdEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    flightIdEntry.place(x=690, y=280)
+    ticketIdEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    ticketIdEntry.place(x=690, y=280)
 
-    seatNumLabel = Label(settingsfrm, text="Seat no.", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    seatNumLabel.place(x=700, y=365)
+    nameLabel = Label(settingsfrm, text="Name", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    nameLabel.place(x=700, y=320)
 
-    seatNumEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    seatNumEntry.place(x=690, y=395)
-#
+    nameEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    nameEntry.place(x=690, y=355)
+
+    phnoLabel = Label(settingsfrm, text="Phone no.", bg="#48484a", fg="#dadadb",width=10, border=0, font=("Uni Sans Heavy", 15))
+    phnoLabel.place(x=700, y=390)
+
+    phnoEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    phnoEntry.place(x=690, y=420)
+
+    seatNumLabel = Label(settingsfrm, text="Seat no.", bg="#48484a", width=6, fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    seatNumLabel.place(x=1050, y=385)
+
+    seatNumEntry = Entry(settingsfrm, bg="#353536", fg="white", width=10, border=0, font=("Uni Sans Heavy", 20))
+    seatNumEntry.place(x=1040, y=420)
+
+    destinationLabel = Label(settingsfrm, text="Destination", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
+    destinationLabel.place(x=700, y=460)
+
+    destinationLabelEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
+    destinationLabelEntry.place(x=690, y=495) 
+
     boardingTimeLabel = Label(settingsfrm, text="Boarding Time", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    boardingTimeLabel.place(x=700, y=480)
+    boardingTimeLabel.place(x=700, y=545)
 
     boardingTimeEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    boardingTimeEntry.place(x=690, y=520)
+    boardingTimeEntry.place(x=690, y=570)
 
     departureDateLabel = Label(settingsfrm, text="Departure Date", bg="#48484a", fg="#dadadb", border=0, font=("Uni Sans Heavy", 15))
-    departureDateLabel.place(x=700, y=600)
+    departureDateLabel.place(x=700, y=620)
 
     departureDateEntry = Entry(settingsfrm, bg="#353536", fg="white", border=0, font=("Uni Sans Heavy", 20))
-    departureDateEntry.place(x=690, y=640)
+    departureDateEntry.place(x=690, y=655)
+
+    def updateflight():
+
+        name = nameEntry.get()
+        phno = phnoEntry.get()
+        seatinfo = seatNumEntry.get()
+        destinationinfo = destinationLabelEntry.get()
+        boardingtimeinfo = boardingTimeEntry.get()
+        departureDateinfo = departureDateEntry.get()
+        
+        if not (ticketinfo and name and seatinfo and destinationinfo and phno and boardingtimeinfo and departureDateinfo):
+            messagebox.showerror("Error","Enter all your details")
+        else:
+            database.update_flight(name, phno, seatinfo, destinationinfo, boardingtimeinfo, departureDateinfo, ticketinfo)
+            messagebox.showinfo("Success", "Successfully updated")
+
+    update = Button(settingsfrm, text="Update", bg="#57a1f8", fg="white", border=0, font=("Uni Sans Heavy", 18), command=updateflight)
+    update.place(x=700, y=720)
+
+    def canceldate():
+        if not (ticketinfo):
+            messagebox.showerror("Error","Enter your ticket id")
+        else:
+            database.delete_flight(ticketinfo)
+            messagebox.showinfo("Success", "Successfully cancelled")
+
+    cancel = Button(settingsfrm, text="Cancel", bg="#57a1f8", fg="white", border=0, font=("Uni Sans Heavy", 18), command=canceldate)
+    cancel.place(x=850, y=720)
+
 
 
 settings = Button(dash, text="Settings", bg="#172233", fg="white", border=0, font=("Sans Serif", 16), command=open_settings)

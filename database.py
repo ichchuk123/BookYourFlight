@@ -26,6 +26,20 @@ def add_flight(flightid, name, p_phno, seat, time, date, destination):
         conn.commit()
         conn.close()
 
+def update_flight( name, p_phno, seat, time, date, destination, id):
+        conn = sqlite3.connect("NewSystem3.db")
+        c = conn.cursor()
+        c.execute('''UPDATE ticketbookes SET passenger_name = ?, passenger_phno = ?, seat = ?, boarding_time = ?, departure_date = ?, destination = ? WHERE id = ?''', ( name, p_phno, seat, time, date, destination, id))
+        conn.commit()
+        conn.close()
+
+def delete_flight(flightid):
+        conn = sqlite3.connect("NewSystem3.db")
+        c = conn.cursor()
+        c.execute('''DELETE FROM ticketbookes WHERE flight_id = ?''', (flightid,))
+        conn.commit()
+        conn.close()
+
 def for_login(username, password):
         conn = sqlite3.connect("NewSystem3.db")
         c = conn.cursor()
