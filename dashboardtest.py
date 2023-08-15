@@ -9,7 +9,7 @@ import random
 
 def get_dates():
     selected_date = cal.get_date()
-    my_label.config(border=0,text="Your Date: " + selected_date)
+    return selected_date
 
 dash = Tk()
 
@@ -104,7 +104,7 @@ location1 = Label(weather_frame, text=("Kathmandu, Nepal"), bg="#f2f2f2", fg="bl
 location1.place(x=40, y=100)
 
 weather_icon_frame = Frame(weather_frame, bg="#f2f2f2", width=120, height=120)
-weather_icon_frame.place(x=630, y=10)
+weather_icon_frame.place(x=670, y=10)
 
 if weather == "Clouds":
     cloud1 = PhotoImage(file="images/cloud2.png")
@@ -187,20 +187,14 @@ def ticket_book():
        
         cal = Calendar(frm, font="Arial 15", selectmode='day', locale='en_US', cursor="hand2", year=2023,month=8,day=10)
         cal.place(x=30, y=420)
-            
-        get_date = Button(frm, text="Get date", fg="white", bg="#57a1f8", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
-        get_date.place(x=150, y=700)
 
-        global my_label
-        my_label = Label(frm, fg="#57a1f8", bg="white", text="")
-        my_label.place(x=120, y=750)
-
-        
-
-        def confirm():
+        def get_dates():
             frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
             frm.place(x=270, y=25) 
-
+            global selected_date
+            selected_date = cal.get_date()  
+            #date_Label = Label(frm, text=selected_date, width=20, bg="white", fg="black", border=0, font=("Microsoft Yahei UI light", 20))
+            #date_Label.place(x=150, y=360)  
             global seatEntry
             info = '''"Congratulations, We have selected ticket 
             That suits best for you"'''
@@ -215,7 +209,7 @@ def ticket_book():
 
             conn = sqlite3.connect("NewSystem3.db")
             c = conn.cursor()
-            c.execute('''SELECT flight_id from flightticket''')
+            c.execute('''SELECT flight_id from ticketbookes''')
             conn.commit()
             conn.close()
 
@@ -228,14 +222,11 @@ def ticket_book():
             seatLabel = Label(frm, text="Seat no.", width=10, bg="white", fg="black", border=0, font=("Uni Sans Thin CAPS", 22))
             seatLabel.place(x=50, y=320) 
 
-            seatEntry = Label(frm, text=seat_random, width=10, bg="white", fg="black", border=1, font=("Uni Sans Thin CAPS", 22))
-            seatEntry.place(x=250, y=320) 
-
+            ticketinfo = ticket_random
             nameinfo = nameEntry.get()
             phnoinfo = phnoEntry.get()
-            seatinfo = seatEntry.get()
+            seatinfo = seat_random
             timeinfo = boarding_time_entry.get()
-            dateinfo = my_label.get()
             destinationinfo = destination_entry.get()
 
             normalLabel = Label(frm, image=normal, bg="black", border=1)
@@ -259,19 +250,24 @@ def ticket_book():
             destination = Label(normalLabel, bg="black", fg="white", height=1, text=destinationinfo, border=0, font=("Microsoft Yahei UI light", 10, 'bold'))
             destination.place(x=160, y=215)
  
-
             def confirmdata():
-                if not (nameinfo and phnoinfo and seatinfo and timeinfo and dateinfo and destinationinfo):
+                if not (nameinfo and phnoinfo and timeinfo and selected_date and destinationinfo):
                     messagebox.showerror("Error","Enter all your details")
                 else:
-                    database.add_flight(nameinfo, phnoinfo, seatinfo, timeinfo, dateinfo, destinationinfo)
+                    database.add_flight(ticketinfo, nameinfo, phnoinfo, seatinfo, timeinfo, selected_date, destinationinfo)
                     messagebox.showinfo("Success", "Successfully updated")    
 
             confirmInfoLabel = Button(frm, text="Confirm", width=10, bg="#57a1f8", fg="black", border=0, font=("Uni Sans Thin CAPS", 22), command=confirmdata)
-            confirmInfoLabel.place(x=500, y=600) 
-       
-        confirmLabel = Button(frm, text="Confirm Details", width=15, bg="#57a1f8", fg="white", border=0, font=("Microsoft Yahei UI light", 20), command=confirm)
-        confirmLabel.place(x=500, y=700)
+            confirmInfoLabel.place(x=500, y=650) 
+
+        get_date = Button(frm, text="Get date", fg="white", bg="#57a1f8", font=("Microsoft Yahei UI light", 15, 'bold'), command = get_dates)
+        get_date.place(x=150, y=700)
+
+        #def confirm():
+        #    frm = Label(dash, height=810, width=1240, bg="#172233", image=frame)
+        #    frm.place(x=270, y=25)      
+        #confirmLabel = Button(frm, text="Confirm Details", width=15, bg="#57a1f8", fg="white", border=0, font=("Microsoft Yahei UI light", 20), command=confirm)
+        #confirmLabel.place(x=500, y=600)
         
 
     yetiLabel = Button(frm, border=0, bg="white", image=yeti, command=open_window)
